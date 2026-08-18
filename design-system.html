@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>LeadHunt</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* LeadHunt v8 | Plus Jakarta Sans | Lucide Icons | Full Design System */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:      #141210;
+  --ink2:     #4A4741;
+  --ink3:     #9C9488;
+  --sand:     #F5F4F0;
+  --white:    #FFFFFF;
+  --line:     #E6E3DC;
+  --line2:    #D0CCC5;
+  --brand:    #D5552A;
+  --brand-d:  #B8431A;
+  --brand-bg: #FEF0E8;
+  --brand-ln: #FAD0B4;
+  --grn:      #1B7A48;
+  --grn-bg:   #EDFAF3;
+  --grn-ln:   #B6EDD0;
+  --amb:      #92580A;
+  --amb-bg:   #FEF8EC;
+  --amb-ln:   #FAE1A0;
+  --red:      #C0392B;
+  --red-bg:   #FEF0EE;
+  --red-ln:   #FAC9C3;
+  --wa:       #25D366;
+  --r-xs:     4px;
+  --r-sm:     8px;
+  --r-md:     12px;
+  --sha-flat: 0 1px 2px rgba(20,18,16,.04),0 1px 3px rgba(20,18,16,.05);
+  --sha-card: 0 1px 4px rgba(20,18,16,.06),0 2px 6px rgba(20,18,16,.04);
+  --font:     'Plus Jakarta Sans',-apple-system,system-ui,sans-serif;
+  --mono:     ui-monospace,'SF Mono',monospace;
+}
+body{
+  width:460px;
+  background:var(--sand);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:13px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:99px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* LUCIDE ICON HELPER */
+.ic{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ic svg{display:block}
+
+/* HEADER */
+.header{
+  background:var(--ink);
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+.logo-mark{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:var(--brand);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-mark svg{color:#fff}
+.wordmark{display:flex;flex-direction:column;gap:1px}
+.brand-name{
+  font-size:15px;font-weight:800;color:#fff;
+  letter-spacing:-.4px;line-height:1;
+}
+.brand-name span{color:var(--brand)}
+.brand-sub{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1px;font-weight:500}
+.version-pill{
+  margin-left:auto;
+  font-size:10px;font-weight:600;
+  color:rgba(255,255,255,.4);
+  border:1px solid rgba(255,255,255,.1);
+  padding:3px 10px;border-radius:99px;letter-spacing:.2px;
+}
+
+/* STATUS BAR */
+.status-bar{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 18px;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  min-height:38px;
+}
+.sdot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--line2);flex-shrink:0;transition:.3s;
+}
+.sdot.idle   {background:var(--line2)}
+.sdot.ready  {background:var(--grn)}
+.sdot.phase1 {background:var(--amb);animation:blink 1.2s infinite}
+.sdot.phase2 {background:var(--brand);animation:blink .9s infinite}
+.sdot.done   {background:var(--grn)}
+.sdot.error  {background:var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+#statusText{
+  font-size:11.5px;color:var(--ink3);font-weight:500;
+  flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* TAB BAR */
+.tabs{
+  display:flex;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  padding:4px 10px;
+  gap:2px;
+}
+.tab{
+  flex:1;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:7px 4px;
+  border:none;background:transparent;cursor:pointer;
+  font-family:var(--font);font-size:11px;font-weight:600;
+  color:var(--ink3);
+  border-radius:var(--r-sm);
+  transition:all .14s;
+  white-space:nowrap;
+}
+.tab svg{color:var(--ink3);transition:color .14s;flex-shrink:0}
+.tab:hover:not(.active){color:var(--ink2);background:var(--sand)}
+.tab:hover:not(.active) svg{color:var(--ink2)}
+.tab.active{color:var(--brand);background:var(--brand-bg)}
+.tab.active svg{color:var(--brand)}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:flex;flex-direction:column}
+
+/* BODY WRAPPER */
+.body{padding:16px 18px;display:flex;flex-direction:column;gap:13px}
+
+/* STAT GRID */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:12px 8px 11px;
+  text-align:center;
+  box-shadow:var(--sha-flat);
+}
+.stat-icon{
+  width:28px;height:28px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 8px;
+  background:var(--brand-bg);
+}
+.stat-icon svg{color:var(--brand)}
+.sv{
+  font-size:20px;font-weight:800;line-height:1;
+  color:var(--ink);font-family:var(--mono);letter-spacing:-1px;
+}
+.sl{
+  font-size:9.5px;color:var(--ink3);margin-top:4px;
+  text-transform:uppercase;letter-spacing:.6px;font-weight:600;
+}
+
+/* PROGRESS CARD */
+.prog-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:14px 15px;
+  box-shadow:var(--sha-flat);
+}
+.prog-phases{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}
+.prog-phase{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 10px;
+  border-radius:var(--r-sm);
+  border:1px solid var(--line);
+  background:var(--sand);
+  font-size:10.5px;font-weight:600;
+  color:var(--ink3);
+  transition:all .2s;
+}
+.prog-phase.active-phase{border-color:var(--brand);color:var(--brand);background:var(--brand-bg)}
+.prog-phase.done-phase{border-color:var(--grn-ln);color:var(--grn);background:var(--grn-bg)}
+.pdot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.prog-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+.prog-label{font-size:11.5px;font-weight:600;color:var(--ink2)}
+.prog-pct{font-size:12px;font-weight:700;color:var(--brand);font-family:var(--mono)}
+.prog-track{height:5px;background:var(--sand);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.prog-fill{height:100%;width:0%;background:var(--brand);border-radius:99px;transition:width .5s ease}
+.prog-log{
+  margin-top:8px;font-size:10.5px;color:var(--ink3);
+  font-family:var(--mono);min-height:15px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* ALERTS */
+.alert{
+  border-radius:var(--r-md);
+  padding:11px 13px;
+  font-size:11.5px;line-height:1.55;
+  display:flex;gap:9px;align-items:flex-start;
+  font-weight:500;
+}
+.alert svg{flex-shrink:0;margin-top:1px}
+.alert.warn{background:var(--amb-bg);border:1px solid var(--amb-ln);color:var(--amb)}
+.alert.warn svg{color:var(--amb)}
+.alert.info{background:var(--brand-bg);border:1px solid var(--brand-ln);color:var(--brand-d)}
+.alert.info svg{color:var(--brand)}
+.alert.succ{background:var(--grn-bg);border:1px solid var(--grn-ln);color:var(--grn)}
+.alert.succ svg{color:var(--grn)}
+.alert.hidden{display:none!important}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid transparent;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  font-family:var(--font);font-size:12.5px;font-weight:700;
+  padding:10px 18px;
+  transition:all .13s;flex:1;
+  letter-spacing:-.1px;
+}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none!important}
+.btn svg{flex-shrink:0}
+
+.btn-primary{background:var(--brand);color:#fff;border-color:var(--brand-d);box-shadow:var(--sha-flat)}
+.btn-primary:hover:not(:disabled){background:var(--brand-d)}
+
+.btn-stop{
+  flex:0 0 auto;padding:10px 14px;
+  background:var(--white);color:var(--red);border-color:var(--red-ln);
+}
+.btn-stop:hover:not(:disabled){background:var(--red-bg)}
+
+.btn-ghost{
+  background:var(--white);color:var(--ink2);border-color:var(--line);
+}
+.btn-ghost:hover:not(:disabled){background:var(--sand);border-color:var(--line2)}
+
+.btn-outline-green{background:var(--white);color:var(--grn);border-color:var(--line)}
+.btn-outline-green:hover:not(:disabled){background:var(--grn-bg);border-color:var(--grn-ln)}
+
+.btn-outline-brand{background:var(--white);color:var(--brand);border-color:var(--line)}
+.btn-outline-brand:hover:not(:disabled){background:var(--brand-bg);border-color:var(--brand-ln)}
+
+.btn-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-dark:hover:not(:disabled){background:var(--ink2)}
+
+.btn-wa{background:var(--wa);color:#fff;border-color:#20B858;font-size:13px}
+.btn-wa:hover:not(:disabled){background:#20B858}
+.btn-wa:disabled{background:#A7F3D0;border-color:#A7F3D0}
+
+.btn-sm{padding:7px 12px;font-size:11.5px;flex:none}
+
+/* LIVE RESULTS CARD */
+.live-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  overflow:hidden;
+  box-shadow:var(--sha-flat);
+}
+.live-hdr{
+  padding:9px 14px;
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--sand);
+}
+.live-hdr-l{
+  font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.7px;color:var(--ink3);
+}
+.live-hdr-r{font-size:11px;color:var(--ink3);font-weight:600}
+.live-list{max-height:148px;overflow-y:auto}
+.r-item{
+  padding:9px 14px;
+  border-bottom:1px solid var(--line);
+  animation:slideUp .18s ease;
+}
+.r-item:last-child{border-bottom:none}
+@keyframes slideUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.r-name{
+  font-size:12px;font-weight:700;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.r-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center}
+.tag{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;padding:2px 8px;
+  border-radius:99px;font-weight:600;white-space:nowrap;
+  border:1px solid var(--line);
+  background:var(--sand);color:var(--ink3);
+}
+.tag svg{width:10px;height:10px}
+.tag.phone{background:var(--grn-bg);color:var(--grn);border-color:var(--grn-ln)}
+.tag.email{background:var(--brand-bg);color:var(--brand-d);border-color:var(--brand-ln)}
+.tag.star {background:var(--amb-bg);color:var(--amb);border-color:var(--amb-ln)}
+.tag.web  {background:var(--sand);color:var(--ink3);border-color:var(--line)}
+.empty-state{
+  padding:28px 16px;text-align:center;color:var(--ink3);
+  font-size:12px;font-weight:500;
+}
+.empty-state svg{color:var(--line2);margin:0 auto 10px;display:block}
+
+/* LEADS TABLE TAB */
+.leads-panel{display:flex;flex-direction:column}
+.table-toolbar{
+  padding:12px 16px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--line);
+  background:var(--white);
+}
+.search-wrap{
+  flex:1;position:relative;
+  display:flex;align-items:center;
+}
+.search-wrap svg{
+  position:absolute;left:10px;
+  color:var(--ink3);pointer-events:none;flex-shrink:0;
+}
+.search-input{
+  width:100%;
+  background:var(--sand);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  padding:8px 11px 8px 34px;
+  color:var(--ink);
+  font-family:var(--font);font-size:12px;font-weight:500;
+  outline:none;
+  transition:border-color .13s,background .13s;
+}
+.search-input:focus{border-color:var(--brand);background:var(--white)}
+.search-input::placeholder{color:var(--ink3)}
+.table-wrap{overflow-x:auto;max-height:340px;overflow-y:auto;background:var(--white)}
+table{width:100%;border-collapse:collapse;min-width:580px}
+thead th{
+  background:var(--sand);
+  color:var(--ink3);
+  padding:9px 12px;text-align:left;
+  font-size:9.5px;text-transform:uppercase;letter-spacing:.6px;
+  white-space:nowrap;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:2;font-weight:700;
+  cursor:pointer;user-select:none;
+}
+thead th:hover{color:var(--ink)}
+thead th.sort-asc::after{content:' \2191';color:var(--brand)}
+thead th.sort-desc::after{content:' \2193';color:var(--brand)}
+tbody td{
+  padding:8px 12px;border-bottom:1px solid var(--line);
+  color:var(--ink);font-size:11.5px;font-weight:500;
+  max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  vertical-align:middle;
+}
+tbody tr:hover td{background:var(--sand)}
+.no-data{
+  padding:40px 16px;text-align:center;
+  color:var(--ink3);font-size:12px;font-weight:500;
+}
+.no-data svg{color:var(--line2);margin:0 auto 10px;display:block}
+.pill{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:10px;padding:2px 8px;
+  border-radius:99px;font-weight:600;
+}
+.pill-green{background:var(--grn-bg);color:var(--grn)}
+.pill-red{background:var(--red-bg);color:var(--red)}
+.table-foot{
+  padding:10px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);background:var(--white);
+}
+.table-foot-l{font-size:11px;color:var(--ink3);font-weight:600}
+
+/* SHARED FORM STYLES */
+.sec-label{
+  font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.8px;
+  color:var(--ink3);margin-bottom:8px;
+}
+.field-group{display:flex;flex-direction:column;gap:5px}
+.field-lbl{font-size:11px;font-weight:600;color:var(--ink2)}
+.field-input{
+  width:100%;
+  background:var(--sand);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  padding:9px 12px;
+  color:var(--ink);
+  font-family:var(--font);font-size:12px;font-weight:500;
+  outline:none;
+  transition:border-color .13s,background .13s;
+}
+.field-input:focus{border-color:var(--brand);background:var(--white)}
+.field-input::placeholder{color:var(--ink3)}
+
+.picker-select{
+  width:100%;
+  background:var(--sand);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  padding:9px 12px;
+  color:var(--ink);
+  font-family:var(--font);font-size:12px;font-weight:500;
+  outline:none;cursor:pointer;
+  transition:border-color .13s;
+}
+.picker-select:focus{border-color:var(--brand)}
+
+/* CARD SHELL */
+.opt-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:14px;
+  display:flex;flex-direction:column;gap:12px;
+  box-shadow:var(--sha-flat);
+}
+
+/* EMAIL TAB */
+.email-wrap{padding:16px 18px;display:flex;flex-direction:column;gap:13px}
+.lead-picker-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 14px;
+  box-shadow:var(--sha-flat);
+}
+.lead-info-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);overflow:hidden;
+  box-shadow:var(--sha-flat);
+}
+.lic-head{
+  padding:11px 14px 10px;
+  background:var(--sand);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;
+}
+.lic-avatar{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--ink3);
+  flex-shrink:0;
+}
+.lic-name{font-size:13px;font-weight:700;color:var(--ink)}
+.lic-cat{font-size:10.5px;color:var(--ink3);font-weight:500;margin-top:1px}
+.lic-body{padding:11px 14px;display:flex;flex-direction:column;gap:7px}
+.lic-row{display:flex;align-items:flex-start;gap:9px;font-size:11.5px}
+.lic-icon{color:var(--ink3);margin-top:1px;flex-shrink:0}
+.lic-val{color:var(--ink2);font-weight:500;word-break:break-all}
+.lic-seg{
+  padding:9px 14px;
+  border-top:1px solid var(--line);
+  background:var(--brand-bg);
+  display:flex;align-items:flex-start;gap:9px;font-size:11px;
+}
+.lic-seg-icon{color:var(--brand);flex-shrink:0;margin-top:1px}
+.lic-seg-text{color:var(--brand-d);font-weight:600;line-height:1.4}
+
+.tone-btn{
+  padding:6px 13px;border-radius:var(--r-sm);
+  border:1px solid var(--line);
+  background:var(--white);color:var(--ink3);
+  cursor:pointer;font-family:var(--font);
+  font-size:11px;font-weight:600;
+  transition:all .13s;
+}
+.tone-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tone-btn:hover:not(.active){color:var(--ink);background:var(--sand);border-color:var(--line2)}
+
+.template-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tpl-card{
+  padding:11px 12px;border-radius:var(--r-sm);
+  border:1px solid var(--line);background:var(--white);
+  cursor:pointer;transition:all .13s;
+}
+.tpl-card:hover{border-color:var(--line2);background:var(--sand)}
+.tpl-card.active{border-color:var(--brand);background:var(--brand-bg)}
+.tpl-icon-row{
+  width:28px;height:28px;border-radius:7px;
+  background:var(--sand);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:8px;
+}
+.tpl-card.active .tpl-icon-row{background:var(--brand-bg)}
+.tpl-icon-row svg{color:var(--ink3)}
+.tpl-card.active .tpl-icon-row svg{color:var(--brand)}
+.tpl-name{font-size:11.5px;font-weight:700;color:var(--ink)}
+.tpl-desc{font-size:10px;color:var(--ink3);margin-top:2px;font-weight:500}
+
+.draft-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sha-flat);
+}
+.draft-hdr{
+  padding:9px 14px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--sand);flex-wrap:wrap;gap:6px;
+}
+.draft-hdr-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3)}
+.draft-divlabel{
+  padding:7px 14px 0;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3);
+}
+.draft-textarea{
+  width:100%;min-height:46px;background:transparent;border:none;
+  padding:8px 14px 11px;color:var(--ink);font-family:var(--font);
+  font-size:12px;font-weight:500;resize:vertical;outline:none;line-height:1.65;
+}
+.draft-textarea::placeholder{color:var(--ink3)}
+
+/* SETTINGS TAB */
+.settings-wrap{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.opt-row{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+.opt-text .opt-label{font-size:12px;font-weight:600;color:var(--ink)}
+.opt-text .opt-sub{font-size:10.5px;color:var(--ink3);margin-top:3px;line-height:1.45;font-weight:500}
+
+/* TOGGLE */
+.tog{position:relative;width:38px;height:21px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.ts{
+  position:absolute;inset:0;border-radius:99px;cursor:pointer;
+  background:var(--line2);transition:.18s;
+}
+.ts::before{
+  content:'';position:absolute;
+  width:15px;height:15px;left:3px;top:3px;
+  background:#fff;border-radius:50%;
+  transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.18);
+}
+.tog input:checked+.ts{background:var(--brand)}
+.tog input:checked+.ts::before{transform:translateX(17px)}
+
+/* NUMBER INPUT */
+.ni{
+  width:68px;background:var(--sand);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:7px 10px;
+  color:var(--ink);font-family:var(--mono);
+  font-size:12px;text-align:right;outline:none;
+  transition:border-color .13s;
+}
+.ni:focus{border-color:var(--brand);background:var(--white)}
+
+/* COLUMN GRID */
+.col-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.col-lbl{
+  display:flex;align-items:center;gap:7px;
+  font-size:12px;color:var(--ink);cursor:pointer;
+  padding:3px 0;font-weight:500;
+}
+.col-lbl input{accent-color:var(--brand);width:14px;height:14px}
+
+/* WHATSAPP TAB */
+.wa-wrap{padding:16px 18px;display:flex;flex-direction:column;gap:13px}
+
+.wa-phone-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 14px;
+  box-shadow:var(--sha-flat);
+}
+.wa-phone-lbl{
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.7px;color:var(--ink3);margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.wa-phone-lbl svg{color:var(--ink3)}
+.wa-phone-hint{font-size:10.5px;color:var(--ink3);margin-top:5px;font-weight:500}
+
+.wa-no-phone{
+  display:flex;align-items:flex-start;gap:9px;
+  padding:11px 13px;
+  background:var(--amb-bg);border:1px solid var(--amb-ln);
+  border-radius:var(--r-md);
+  font-size:11.5px;color:var(--amb);line-height:1.5;font-weight:500;
+}
+.wa-no-phone svg{flex-shrink:0;margin-top:1px}
+
+.wa-msg-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sha-flat);
+}
+.wa-msg-hdr{
+  padding:9px 14px;border-bottom:1px solid var(--line);
+  background:var(--sand);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.wa-msg-hdr-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3)}
+.wa-msg-actions{display:flex;align-items:center;gap:6px}
+.wa-msg-chars{font-size:10.5px;color:var(--ink3);font-family:var(--mono);font-weight:600}
+.wa-textarea{
+  width:100%;min-height:130px;background:transparent;border:none;
+  padding:12px 14px;color:var(--ink);font-family:var(--font);
+  font-size:12px;font-weight:500;resize:vertical;outline:none;line-height:1.65;
+}
+.wa-textarea::placeholder{color:var(--ink3)}
+
+.attach-zone{
+  border:1.5px dashed var(--line2);border-radius:var(--r-md);
+  padding:18px 14px;text-align:center;cursor:pointer;
+  transition:all .18s;background:var(--sand);position:relative;
+}
+.attach-zone:hover,.attach-zone.drag-over{border-color:var(--brand);background:var(--brand-bg)}
+.attach-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.attach-zone svg{color:var(--ink3);margin:0 auto 8px;display:block}
+.attach-zone:hover svg,.attach-zone.drag-over svg{color:var(--brand)}
+.attach-lbl{font-size:12px;font-weight:600;color:var(--ink2)}
+.attach-sub{font-size:10.5px;color:var(--ink3);margin-top:3px;font-weight:500}
+
+.attached-file{
+  display:flex;align-items:center;gap:11px;
+  background:var(--grn-bg);border:1px solid var(--grn-ln);
+  border-radius:var(--r-md);padding:11px 13px;
+}
+.attached-icon{flex-shrink:0;color:var(--grn)}
+.attached-info{flex:1;min-width:0}
+.attached-name{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.attached-size{font-size:10.5px;color:var(--ink3);margin-top:2px;font-weight:500}
+.attached-remove{
+  background:none;border:none;cursor:pointer;
+  color:var(--ink3);padding:4px;border-radius:var(--r-xs);
+  display:flex;transition:color .13s;
+}
+.attached-remove:hover{color:var(--red)}
+
+.wa-note{
+  font-size:11px;color:var(--ink3);
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:10px 12px;line-height:1.55;font-weight:500;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.wa-note svg{flex-shrink:0;color:var(--ink3);margin-top:1px}
+
+.attach-ready-box{
+  background:var(--brand-bg);border:1px solid var(--brand-ln);
+  border-radius:var(--r-md);padding:11px 13px;
+  display:flex;gap:9px;align-items:flex-start;
+}
+.attach-ready-box svg{flex-shrink:0;color:var(--brand);margin-top:1px}
+.attach-ready-title{font-size:11.5px;font-weight:700;color:var(--brand-d);margin-bottom:2px}
+.attach-ready-sub{font-size:10.5px;color:var(--ink3);font-weight:500}
+
+.wa-bulk-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 14px;box-shadow:var(--sha-flat);
+}
+.wa-bulk-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wa-bulk-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3)}
+.wa-bulk-count{
+  font-size:10px;color:var(--ink3);font-weight:600;
+  background:var(--sand);padding:3px 9px;border-radius:99px;border:1px solid var(--line);
+}
+.wa-bulk-list{max-height:90px;overflow-y:auto;display:flex;flex-direction:column;gap:5px}
+.wa-bulk-item{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 10px;
+  background:var(--sand);border-radius:var(--r-sm);
+  border:1px solid var(--line);font-size:11.5px;
+}
+.wa-bulk-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-weight:600}
+.wa-bulk-phone{font-family:var(--mono);font-size:10.5px;color:var(--ink3);flex-shrink:0;font-weight:500}
+
+.wa-send-row{display:flex;gap:8px}
+
+/* FOOTER */
+.footer{
+  padding:10px 18px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10.5px;color:var(--ink3);background:var(--white);
+  font-weight:500;
+}
+
+/* COPY TOAST */
+.copy-toast{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  background:var(--ink);color:#fff;
+  font-size:12px;font-weight:600;padding:9px 18px;
+  border-radius:var(--r-sm);pointer-events:none;
+  opacity:0;transition:opacity .22s;z-index:999;
+  white-space:nowrap;
+  box-shadow:0 4px 14px rgba(20,18,16,.2);
+}
+.copy-toast.show{opacity:1}
+
+/* GENERATING OVERLAY */
+.gen-overlay{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:22px;color:var(--ink3);font-size:12px;font-weight:600;
+}
+.spin{animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ICON SHORTHAND SVGs (Lucide, stroke-width 2, stroke-linecap round, stroke-linejoin round) */
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-mark">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+  </div>
+  <div class="wordmark">
+    <div class="brand-name">Lead<span>Hunt</span></div>
+    <div class="brand-sub">Google Maps Lead Extractor</div>
+  </div>
+  
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="sdot idle" id="sDot"></div>
+  <span id="statusText">Open Google Maps, search a category, then click Start</span>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" data-tab="scrape">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Scrape
+  </button>
+  <button class="tab" data-tab="leads">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Leads
+  </button>
+  <button class="tab" data-tab="email">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    Email
+  </button>
+  <button class="tab" data-tab="whatsapp">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    WhatsApp
+  </button>
+  <button class="tab" data-tab="settings">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Settings
+  </button>
+</div>
+
+<!-- SCRAPE TAB -->
+<div class="panel active" id="tab-scrape">
+<div class="body">
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="sv" id="s0">0</div>
+      <div class="sl">Scraped</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+      <div class="sv" id="s1">0</div>
+      <div class="sl">Emails</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.6a16 16 0 0 0 5.91 5.91l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="sv" id="s2">0</div>
+      <div class="sl">Phones</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="sv" id="s3">0</div>
+      <div class="sl">Websites</div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="prog-card">
+    <div class="prog-phases">
+      <div class="prog-phase" id="ph1"><span class="pdot"></span>Phase 1: Collect URLs</div>
+      <div class="prog-phase" id="ph2"><span class="pdot"></span>Phase 2: Extract data</div>
+    </div>
+    <div class="prog-header">
+      <span class="prog-label">Progress</span>
+      <span class="prog-pct" id="progPct">0%</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="progBar"></div></div>
+    <div class="prog-log" id="progLog">Waiting to start...</div>
+  </div>
+
+  <!-- Alert -->
+  <div class="alert warn hidden" id="alertBox">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="alertMsg"></span>
+  </div>
+
+  <!-- Controls -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btnStart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Start Scraping
+    </button>
+    <button class="btn btn-stop" id="btnStop" disabled>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+    </button>
+  </div>
+
+  <!-- Live Results -->
+  <div class="live-card">
+    <div class="live-hdr">
+      <span class="live-hdr-l">Live Results</span>
+      <span class="live-hdr-r" id="liveCount">0 entries</span>
+    </div>
+    <div class="live-list" id="liveList">
+      <div class="empty-state">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        No results yet. Click Start Scraping.
+      </div>
+    </div>
+  </div>
+
+  <!-- Export -->
+  <div class="btn-row">
+    <button class="btn btn-outline-green btn-sm" id="btnCSV" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </button>
+    <button class="btn btn-outline-brand btn-sm" id="btnJSON" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export JSON
+    </button>
+    <button class="btn btn-ghost btn-sm" id="btnClear" disabled style="flex:0 0 auto;padding:7px 13px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      Clear
+    </button>
+  </div>
+
+</div>
+</div>
+
+<!-- LEADS TAB -->
+<div class="panel" id="tab-leads">
+  <div class="table-toolbar">
+    <div class="search-wrap">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search by name, phone, address..."/>
+    </div>
+    <button class="btn btn-outline-green btn-sm" id="btnCSV2" disabled>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      CSV
+    </button>
+    <button class="btn btn-outline-brand btn-sm" id="btnJSON2" disabled>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      JSON
+    </button>
+  </div>
+  <div class="table-wrap" id="tableWrap">
+    <div class="no-data">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      Run a scrape first to see leads here.
+    </div>
+  </div>
+  <div class="table-foot">
+    <span class="table-foot-l" id="tableStat">0 records</span>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-dark btn-sm" id="btnEmailAll" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg>
+        Draft Emails
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL TAB -->
+<div class="panel" id="tab-email">
+<div class="email-wrap">
+
+  <div class="lead-picker-card">
+    <div class="sec-label">Select Lead</div>
+    <select class="picker-select" id="leadPicker">
+      <option value="">Select a scraped lead...</option>
+    </select>
+  </div>
+
+  <div class="lead-info-card" id="leadInfoCard" style="display:none">
+    <div class="lic-head">
+      <div class="lic-avatar" id="lic-initials">--</div>
+      <div>
+        <div class="lic-name" id="li-name">Business Name</div>
+        <div class="lic-cat" id="li-cat">Category</div>
+      </div>
+    </div>
+    <div class="lic-body">
+      <div class="lic-row">
+        <svg class="lic-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span class="lic-val" id="li-rating">No rating</span>
+      </div>
+      <div class="lic-row">
+        <svg class="lic-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.6a16 16 0 0 0 5.91 5.91l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="lic-val" id="li-phone">No phone</span>
+      </div>
+      <div class="lic-row">
+        <svg class="lic-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span class="lic-val" id="li-email">No email</span>
+      </div>
+      <div class="lic-row">
+        <svg class="lic-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="lic-val" id="li-addr">No address</span>
+      </div>
+    </div>
+    <div class="lic-seg" id="licSegRow" style="display:none">
+      <svg class="lic-seg-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg>
+      <div>
+        <div class="lic-seg-text" id="li-segment">Detected segment</div>
+        <div style="font-size:10.5px;color:var(--ink3);font-weight:500;margin-top:2px" id="li-services">Services</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt-card">
+    <div class="sec-label">Your Details</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="field-group">
+        <div class="field-lbl">Your Name</div>
+        <input class="field-input" id="senderName" placeholder="Your name" type="text"/>
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">Company</div>
+        <input class="field-input" id="senderCompany" placeholder="Your company name" type="text"/>
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field-lbl">Service You Offer</div>
+      <input class="field-input" id="senderService" placeholder="Services you offer" type="text"/>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Email Template</div>
+    <div class="template-cards">
+      <div class="tpl-card active" data-tpl="intro">
+        <div class="tpl-icon-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="tpl-name">Introduction</div>
+        <div class="tpl-desc">First-touch cold outreach</div>
+      </div>
+      <div class="tpl-card" data-tpl="audit">
+        <div class="tpl-icon-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="tpl-name">Free Audit</div>
+        <div class="tpl-desc">Offer a website audit</div>
+      </div>
+      <div class="tpl-card" data-tpl="review">
+        <div class="tpl-icon-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="tpl-name">Review Growth</div>
+        <div class="tpl-desc">Reputation management</div>
+      </div>
+      <div class="tpl-card" data-tpl="collab">
+        <div class="tpl-icon-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="tpl-name">Partnership</div>
+        <div class="tpl-desc">Collaboration proposal</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Tone</div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+      <button class="tone-btn active" data-tone="professional">Professional</button>
+      <button class="tone-btn" data-tone="friendly">Friendly</button>
+      <button class="tone-btn" data-tone="persuasive">Persuasive</button>
+      <button class="tone-btn" data-tone="concise">Concise</button>
+    </div>
+  </div>
+
+  <button class="btn btn-dark" id="btnGenerate">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg>
+    Generate Email Draft
+  </button>
+
+  <div class="draft-card" id="draftBox" style="display:none">
+    <div class="draft-hdr">
+      <span class="draft-hdr-l">Generated Draft</span>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-ghost btn-sm" id="btnCopySubject" style="gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Subject
+        </button>
+        <button class="btn btn-outline-green btn-sm" id="btnCopyAll" style="gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy All
+        </button>
+        <button class="btn btn-outline-brand btn-sm" id="btnMailto" style="gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Open Mail
+        </button>
+      </div>
+    </div>
+    <div class="draft-divlabel">Subject</div>
+    <textarea class="draft-textarea" id="draftSubject" rows="1" style="min-height:0;font-weight:700;padding-bottom:0"></textarea>
+    <div class="draft-divlabel" style="border-top:1px solid var(--line)">Body</div>
+    <textarea class="draft-textarea" id="draftBody" rows="8"></textarea>
+  </div>
+
+</div>
+</div>
+
+<!-- WHATSAPP TAB -->
+<div class="panel" id="tab-whatsapp">
+<div class="wa-wrap">
+
+  <div class="lead-picker-card">
+    <div class="sec-label">Select Lead</div>
+    <select class="picker-select" id="waPicker">
+      <option value="">Select a scraped lead...</option>
+    </select>
+  </div>
+
+  <div class="wa-no-phone hidden" id="waNoPhone">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    This lead has no phone number. Re-scrape with Deep Scrape enabled, or enter a number below.
+  </div>
+
+  <div class="wa-phone-card">
+    <div class="wa-phone-lbl">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.6a16 16 0 0 0 5.91 5.91l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Phone Number (with country code)
+    </div>
+    <input class="field-input" id="waPhone" type="tel" placeholder="+91 98330 65209" style="font-family:var(--mono);font-size:14px;font-weight:700"/>
+    <div class="wa-phone-hint" id="waPhoneSub">Edit to correct the format if needed</div>
+  </div>
+
+  <div class="wa-msg-card">
+    <div class="wa-msg-hdr">
+      <span class="wa-msg-hdr-l">WhatsApp Message</span>
+      <div class="wa-msg-actions">
+        <span class="wa-msg-chars" id="waMsgChars">0 chars</span>
+        <button class="btn btn-ghost btn-sm" id="btnWaGenerate" style="gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg>
+          Generate
+        </button>
+        <button class="btn btn-ghost btn-sm" id="btnWaClear" style="gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Clear
+        </button>
+      </div>
+    </div>
+    <textarea class="wa-textarea" id="waMessage" placeholder="Select a lead and click Generate to create a personalised message."></textarea>
+  </div>
+
+  <div>
+    <div class="sec-label">Message Style</div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+      <button class="tone-btn active" data-wa-tpl="intro">Intro</button>
+      <button class="tone-btn" data-wa-tpl="audit">Audit Offer</button>
+      <button class="tone-btn" data-wa-tpl="review">Review</button>
+      <button class="tone-btn" data-wa-tpl="collab">Collab</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Tone</div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+      <button class="tone-btn active" data-wa-tone="friendly">Friendly</button>
+      <button class="tone-btn" data-wa-tone="professional">Professional</button>
+      <button class="tone-btn" data-wa-tone="concise">Concise</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Attachment (optional)</div>
+    <div class="attach-zone" id="attachZone">
+      <input type="file" id="attachFile" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+      <div class="attach-lbl">Drag and drop or click to attach</div>
+      <div class="attach-sub">Images, PDF, Word, Excel, PPT up to 64 MB</div>
+    </div>
+    <div class="attached-file hidden" id="attachedFile">
+      <svg class="attached-icon" id="attachedIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div class="attached-info">
+        <div class="attached-name" id="attachedName">file.pdf</div>
+        <div class="attached-size" id="attachedSize">0 KB</div>
+      </div>
+      <button class="attached-remove" id="btnRemoveAttach" title="Remove attachment">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="wa-note" id="attachNote" style="margin-top:8px;display:none">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      WhatsApp Web opens with your message pre-filled. Click the paperclip icon in WhatsApp Web to attach your file.
+    </div>
+    <div id="attachReadyBox" class="attach-ready-box hidden" style="margin-top:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+      <div>
+        <div class="attach-ready-title">File ready to attach</div>
+        <div class="attach-ready-sub">After WhatsApp Web opens, click the paperclip icon in the chat to attach your file.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wa-bulk-card" id="waBulkWrap" style="display:none">
+    <div class="wa-bulk-hdr">
+      <span class="wa-bulk-lbl">Bulk Queue</span>
+      <span class="wa-bulk-count" id="waBulkCount">0 leads with phone</span>
+    </div>
+    <div class="wa-bulk-list" id="waBulkList"></div>
+  </div>
+
+  <div class="wa-send-row">
+    <button class="btn btn-wa" id="btnWaSend" disabled>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Send on WhatsApp
+    </button>
+    <button class="btn btn-ghost btn-sm" id="btnWaBulk" disabled style="flex:0 0 auto;white-space:nowrap;gap:6px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Bulk Queue
+    </button>
+  </div>
+
+</div>
+</div>
+
+<!-- SETTINGS TAB -->
+<div class="panel" id="tab-settings">
+<div class="settings-wrap">
+
+  <div>
+    <div class="sec-label">Scraping</div>
+    <div class="opt-card">
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Auto-scroll results</div><div class="opt-sub">Scroll to load all listings before scraping begins</div></div>
+        <label class="tog"><input type="checkbox" id="oScroll" checked/><span class="ts"></span></label>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Deep scrape</div><div class="opt-sub">Opens cards missing website or phone to enrich data</div></div>
+        <label class="tog"><input type="checkbox" id="oDeep" checked/><span class="ts"></span></label>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Email extraction</div><div class="opt-sub">Crawl each business website for contact emails</div></div>
+        <label class="tog"><input type="checkbox" id="oEmail" checked/><span class="ts"></span></label>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Opening hours</div><div class="opt-sub">Extract open and close times from each listing</div></div>
+        <label class="tog"><input type="checkbox" id="oHours"/><span class="ts"></span></label>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Result limit</div><div class="opt-sub">Maximum listings to collect per run (1 to 500)</div></div>
+        <input class="ni" id="oLimit" type="number" value="200" min="1" max="500"/>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Delay between items</div><div class="opt-sub">Milliseconds. Lower is faster, higher is safer</div></div>
+        <input class="ni" id="oDelay" type="number" value="600" min="200" max="5000" step="100"/>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Filters</div>
+    <div class="opt-card">
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Minimum rating</div><div class="opt-sub">Skip listings below this rating. Set 0 to disable</div></div>
+        <input class="ni" id="oMinRating" type="number" value="0" min="0" max="5" step="0.1"/>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Require phone number</div><div class="opt-sub">Skip listings with no phone number found</div></div>
+        <label class="tog"><input type="checkbox" id="oNeedPhone"/><span class="ts"></span></label>
+      </div>
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Require website</div><div class="opt-sub">Skip listings with no website found</div></div>
+        <label class="tog"><input type="checkbox" id="oNeedWeb"/><span class="ts"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Export Columns</div>
+    <div class="opt-card">
+      <div class="col-grid" id="colGrid"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">AI Email (optional)</div>
+    <div class="opt-card">
+      <div class="opt-text">
+        <div class="opt-label">Anthropic API key</div>
+        <div class="opt-sub">Leave blank to use built-in smart templates. Paste a key to use AI-generated emails. Stored only on this device.</div>
+      </div>
+      <input class="field-input" id="apiKey" type="password" placeholder="sk-ant-... (optional)" autocomplete="off" style="font-family:var(--mono);font-size:11.5px"/>
+      <div class="opt-row" style="align-items:center">
+        <div class="opt-sub" id="apiKeyStatus" style="margin:0">Using smart templates</div>
+        <button class="btn btn-ghost btn-sm" id="btnSaveKey" style="flex:0 0 auto;gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Danger Zone</div>
+    <div class="opt-card">
+      <div class="opt-row">
+        <div class="opt-text"><div class="opt-label">Clear all saved data</div><div class="opt-sub">Permanently removes all scraped leads from storage</div></div>
+        <button class="btn btn-sm" id="btnNukeClear" style="flex:0 0 auto;background:var(--red-bg);color:var(--red);border-color:var(--red-ln);gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Clear All
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>LeadHunt</span>
+  <span id="footStat">0 records saved</span>
+</div>
+
+<!-- COPY TOAST -->
+<div class="copy-toast" id="copyNotif">Copied to clipboard</div>
+
+<script src="src/pitchModel.js"></script>
+<script src="src/popup.js"></script>
+</body>
+</html>

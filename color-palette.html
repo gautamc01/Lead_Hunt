@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LeadHunt — Colour Palette</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F5F4F0;color:#141210;padding:48px 32px;-webkit-font-smoothing:antialiased}
+.page{max-width:880px;margin:0 auto}
+.header{margin-bottom:48px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9C9488;margin-bottom:12px}
+h1{font-size:32px;font-weight:800;color:#141210;letter-spacing:-.6px;margin-bottom:8px}
+.subtitle{font-size:15px;color:#9C9488;font-weight:500}
+.section{margin-bottom:40px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#9C9488;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #E6E3DC}
+.palette-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-radius:12px;overflow:hidden;border:1px solid #E6E3DC;margin-bottom:12px}
+.swatch{padding:0;aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;transition:transform .15s}
+.swatch:hover{transform:scale(1.04);z-index:1}
+.swatch-name{font-size:10px;font-weight:700;opacity:.85;line-height:1;margin-bottom:2px}
+.swatch-hex{font-size:9px;opacity:.65;font-family:ui-monospace,monospace}
+.meta-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:32px}
+.meta-card{background:#fff;border:1px solid #E6E3DC;border-radius:10px;padding:12px 14px}
+.meta-dot{width:32px;height:32px;border-radius:8px;margin-bottom:10px;border:1px solid rgba(0,0,0,.06)}
+.meta-label{font-size:11px;font-weight:700;color:#141210;margin-bottom:3px}
+.meta-hex{font-size:10px;font-family:ui-monospace,monospace;color:#9C9488;margin-bottom:4px}
+.meta-use{font-size:10px;color:#9C9488;font-weight:500;line-height:1.4}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.type-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:20px}
+.type-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9C9488;margin-bottom:16px}
+.type-row{display:flex;align-items:baseline;gap:14px;padding:10px 0;border-bottom:1px solid #F0EDE8}
+.type-row:last-child{border-bottom:none}
+.type-meta{width:130px;flex-shrink:0}
+.type-name{font-size:10px;font-weight:700;color:#9C9488;text-transform:uppercase;letter-spacing:.5px}
+.type-spec{font-size:9px;font-family:ui-monospace,monospace;color:#C8C2BC;margin-top:2px}
+.radius-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.r-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:20px;text-align:center}
+.r-box{width:48px;height:48px;background:#FEF0E8;border:1.5px solid #D5552A;margin:0 auto 12px}
+.r-name{font-size:11px;font-weight:700;color:#141210;margin-bottom:3px}
+.r-val{font-size:10px;font-family:ui-monospace,monospace;color:#9C9488}
+.r-use{font-size:10px;color:#C8C2BC;margin-top:3px}
+.spacing-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;overflow:hidden}
+.sp-row{display:flex;align-items:center;gap:16px;padding:11px 16px;border-bottom:1px solid #F0EDE8}
+.sp-row:last-child{border-bottom:none}
+.sp-name{width:30px;font-size:11px;font-weight:700;color:#141210}
+.sp-val{width:50px;font-size:10px;font-family:ui-monospace,monospace;color:#9C9488}
+.sp-bar{height:5px;background:#D5552A;border-radius:2px}
+.sp-use{font-size:11px;color:#9C9488;margin-left:8px;font-weight:500}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="eyebrow">LeadHunt Design System</div>
+    <h1>Colour Palette</h1>
+    <div class="subtitle">All colours, their tokens, and intended usage</div>
+  </div>
+
+  <!-- Brand -->
+  <div class="section">
+    <div class="section-title">Brand / Accent</div>
+    <div class="palette-row">
+      <div class="swatch" style="background:#FEF0E8"><div class="swatch-name" style="color:#D5552A">Brand 50</div><div class="swatch-hex" style="color:#D5552A">#FEF0E8</div></div>
+      <div class="swatch" style="background:#FAD0B4"><div class="swatch-name" style="color:#9E3A18">Brand 100</div><div class="swatch-hex" style="color:#9E3A18">#FAD0B4</div></div>
+      <div class="swatch" style="background:#F0997B"><div class="swatch-name" style="color:#fff">Brand 200</div><div class="swatch-hex" style="color:#fff">#F0997B</div></div>
+      <div class="swatch" style="background:#D5552A"><div class="swatch-name" style="color:#fff">Brand 500</div><div class="swatch-hex" style="color:#fff">#D5552A</div></div>
+      <div class="swatch" style="background:#9E3A18"><div class="swatch-name" style="color:#fff">Brand 800</div><div class="swatch-hex" style="color:#fff">#9E3A18</div></div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-card"><div class="meta-dot" style="background:#FEF0E8"></div><div class="meta-label">--brand-bg</div><div class="meta-hex">#FEF0E8</div><div class="meta-use">Tinted backgrounds, hover states</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#FAD0B4"></div><div class="meta-label">--brand-ln</div><div class="meta-hex">#FAD0B4</div><div class="meta-use">Borders on brand-tinted surfaces</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#F0997B"></div><div class="meta-label">--brand-lt</div><div class="meta-hex">#F0997B</div><div class="meta-use">Lighter accent, illustrations</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#D5552A"></div><div class="meta-label">--brand</div><div class="meta-hex">#D5552A</div><div class="meta-use">Primary buttons, active tabs, links</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#9E3A18"></div><div class="meta-label">--brand-d</div><div class="meta-hex">#9E3A18</div><div class="meta-use">Hover state on primary button</div></div>
+    </div>
+  </div>
+
+  <!-- Neutrals -->
+  <div class="section">
+    <div class="section-title">Neutral / Base</div>
+    <div class="palette-row">
+      <div class="swatch" style="background:#F5F4F0;border:1px solid #E6E3DC"><div class="swatch-name" style="color:#9C9488">Sand 50</div><div class="swatch-hex" style="color:#9C9488">#F5F4F0</div></div>
+      <div class="swatch" style="background:#E6E3DC"><div class="swatch-name" style="color:#9C9488">Stone 100</div><div class="swatch-hex" style="color:#9C9488">#E6E3DC</div></div>
+      <div class="swatch" style="background:#D0CCC5"><div class="swatch-name" style="color:#5C5650">Stone 200</div><div class="swatch-hex" style="color:#5C5650">#D0CCC5</div></div>
+      <div class="swatch" style="background:#9C9488"><div class="swatch-name" style="color:#fff">Warm 400</div><div class="swatch-hex" style="color:#fff">#9C9488</div></div>
+      <div class="swatch" style="background:#4A4741"><div class="swatch-name" style="color:#fff">Ink 700</div><div class="swatch-hex" style="color:#fff">#4A4741</div></div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-card"><div class="meta-dot" style="background:#F5F4F0;border:1px solid #E6E3DC"></div><div class="meta-label">--sand</div><div class="meta-hex">#F5F4F0</div><div class="meta-use">Page background, section fills</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#E6E3DC"></div><div class="meta-label">--line</div><div class="meta-hex">#E6E3DC</div><div class="meta-use">All borders and dividers</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#D0CCC5"></div><div class="meta-label">--line2</div><div class="meta-hex">#D0CCC5</div><div class="meta-use">Stronger dividers, toggle off state</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#9C9488"></div><div class="meta-label">--ink3</div><div class="meta-hex">#9C9488</div><div class="meta-use">Muted text, placeholders, labels</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#141210"></div><div class="meta-label">--ink</div><div class="meta-hex">#141210</div><div class="meta-use">Primary text, header background</div></div>
+    </div>
+  </div>
+
+  <!-- Semantic -->
+  <div class="section">
+    <div class="section-title">Semantic Colours</div>
+    <div class="meta-row">
+      <div class="meta-card"><div class="meta-dot" style="background:#1B7A48"></div><div class="meta-label">--grn</div><div class="meta-hex">#1B7A48</div><div class="meta-use">Success, phones found, emails found</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#EDFAF3"></div><div class="meta-label">--grn-bg</div><div class="meta-hex">#EDFAF3</div><div class="meta-use">Success tint backgrounds</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#92580A"></div><div class="meta-label">--amb</div><div class="meta-hex">#92580A</div><div class="meta-use">Warnings, in-progress phase</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#C0392B"></div><div class="meta-label">--red</div><div class="meta-hex">#C0392B</div><div class="meta-use">Errors, destructive actions</div></div>
+      <div class="meta-card"><div class="meta-dot" style="background:#25D366"></div><div class="meta-label">--wa</div><div class="meta-hex">#25D366</div><div class="meta-use">WhatsApp send button only</div></div>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="section">
+    <div class="section-title">Typography Scale — Plus Jakarta Sans</div>
+    <div class="type-card">
+      <div class="type-title">Type Scale</div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Display</div><div class="type-spec">22px / 800 / -0.5px</div></div><div style="font-size:22px;font-weight:800;letter-spacing:-.5px">LeadHunt</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Heading 1</div><div class="type-spec">16px / 700 / -0.3px</div></div><div style="font-size:16px;font-weight:700;letter-spacing:-.3px">Start scraping leads</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Heading 2</div><div class="type-spec">13px / 700 / -0.2px</div></div><div style="font-size:13px;font-weight:700;letter-spacing:-.2px">Live Results</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Body</div><div class="type-spec">12.5px / 500</div></div><div style="font-size:12.5px;font-weight:500">Phase 1 collecting business cards from search results</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Caption</div><div class="type-spec">11px / 500 / #9C9488</div></div><div style="font-size:11px;font-weight:500;color:#9C9488">Interior designer, 4.8 stars, 340 reviews</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Label</div><div class="type-spec">10px / 700 / uppercase</div></div><div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9C9488">Export columns</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-name">Mono</div><div class="type-spec">11px / monospace</div></div><div style="font-size:11px;font-family:ui-monospace,monospace;color:#4A4741">+91 98330 65209</div></div>
+    </div>
+  </div>
+
+  <!-- Radius + Spacing -->
+  <div class="section">
+    <div class="section-title">Border Radius</div>
+    <div class="radius-row">
+      <div class="r-card"><div class="r-box" style="border-radius:4px"></div><div class="r-name">xs</div><div class="r-val">4px</div><div class="r-use">Tags, badges</div></div>
+      <div class="r-card"><div class="r-box" style="border-radius:8px"></div><div class="r-name">sm</div><div class="r-val">8px</div><div class="r-use">Buttons, inputs</div></div>
+      <div class="r-card"><div class="r-box" style="border-radius:12px"></div><div class="r-name">md</div><div class="r-val">12px</div><div class="r-use">Cards, panels</div></div>
+      <div class="r-card"><div class="r-box" style="border-radius:99px;height:24px;margin-bottom:22px"></div><div class="r-name">pill</div><div class="r-val">99px</div><div class="r-use">Pills, toggles</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Spacing Scale</div>
+    <div class="spacing-card">
+      <div class="sp-row"><div class="sp-name">xs</div><div class="sp-val">4px</div><div class="sp-bar" style="width:16px"></div><div class="sp-use">Icon to text gap, tight pairs</div></div>
+      <div class="sp-row"><div class="sp-name">sm</div><div class="sp-val">8px</div><div class="sp-bar" style="width:32px"></div><div class="sp-use">Inner padding small, badge gaps</div></div>
+      <div class="sp-row"><div class="sp-name">md</div><div class="sp-val">12px</div><div class="sp-bar" style="width:48px"></div><div class="sp-use">Card inner padding, form gaps</div></div>
+      <div class="sp-row"><div class="sp-name">lg</div><div class="sp-val">16px</div><div class="sp-bar" style="width:64px"></div><div class="sp-use">Section padding, card to card</div></div>
+      <div class="sp-row"><div class="sp-name">xl</div><div class="sp-val">24px</div><div class="sp-bar" style="width:96px"></div><div class="sp-use">Tab body padding, section breaks</div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LeadHunt — Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#F5F4F0;color:#141210;-webkit-font-smoothing:antialiased}
+.hero{background:#141210;padding:80px 32px;text-align:center}
+.hero-eye{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#D5552A;margin-bottom:20px}
+.hero-h1{font-size:48px;font-weight:800;color:#fff;letter-spacing:-1.2px;line-height:1.05;margin-bottom:20px;max-width:640px;margin-left:auto;margin-right:auto}
+.hero-h1 span{color:#D5552A}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.45);font-weight:500;max-width:480px;margin:0 auto 40px;line-height:1.6}
+.hero-tags{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hero-tag{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1);font-size:11px;font-weight:600;padding:6px 14px;border-radius:99px;letter-spacing:.3px}
+.page{max-width:800px;margin:0 auto;padding:64px 32px}
+.section{margin-bottom:64px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#D5552A;margin-bottom:14px}
+h2{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:16px;color:#141210}
+p{font-size:15px;line-height:1.75;color:#4A4741;font-weight:500;margin-bottom:16px}
+p:last-child{margin-bottom:0}
+.divider{height:1px;background:#E6E3DC;margin:64px 0}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.problem-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:20px}
+.problem-icon{font-size:20px;margin-bottom:10px}
+.problem-title{font-size:13px;font-weight:700;color:#141210;margin-bottom:6px}
+.problem-body{font-size:12.5px;color:#9C9488;line-height:1.6;font-weight:500}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
+.stat-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:24px 20px;text-align:center}
+.stat-val{font-size:36px;font-weight:800;color:#D5552A;letter-spacing:-1.5px;line-height:1}
+.stat-label{font-size:12px;color:#9C9488;margin-top:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.phase-stack{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.phase-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start}
+.phase-num{width:32px;height:32px;border-radius:8px;background:#FEF0E8;color:#D5552A;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.phase-title{font-size:13px;font-weight:700;color:#141210;margin-bottom:5px}
+.phase-body{font-size:12.5px;color:#9C9488;line-height:1.6;font-weight:500}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.feature-card{background:#fff;border:1px solid #E6E3DC;border-radius:12px;padding:20px}
+.feature-title{font-size:13px;font-weight:700;color:#141210;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.feature-dot{width:8px;height:8px;border-radius:50%;background:#D5552A;flex-shrink:0}
+.feature-body{font-size:12.5px;color:#9C9488;line-height:1.6;font-weight:500}
+.segment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
+.segment-pill{background:#fff;border:1px solid #E6E3DC;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:600;color:#4A4741}
+.segment-pill span{display:block;font-size:10px;color:#9C9488;font-weight:500;margin-top:2px}
+.tab-showcase{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:20px}
+.tab-card{background:#fff;border:1px solid #E6E3DC;border-radius:10px;padding:14px 10px;text-align:center}
+.tab-name{font-size:12px;font-weight:700;color:#141210;margin-bottom:4px}
+.tab-desc{font-size:10px;color:#9C9488;font-weight:500;line-height:1.4}
+.decision-stack{display:flex;flex-direction:column;gap:1px;margin-top:20px;border:1px solid #E6E3DC;border-radius:12px;overflow:hidden}
+.decision-row{background:#fff;padding:16px 20px;display:flex;gap:20px;border-bottom:1px solid #E6E3DC}
+.decision-row:last-child{border-bottom:none}
+.decision-q{width:200px;flex-shrink:0;font-size:12.5px;font-weight:700;color:#141210}
+.decision-a{font-size:12.5px;color:#4A4741;font-weight:500;line-height:1.6}
+.tech-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px}
+.tech-card{background:#fff;border:1px solid #E6E3DC;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.tech-dot{width:10px;height:10px;border-radius:50%;background:#D5552A;flex-shrink:0}
+.tech-name{font-size:12.5px;font-weight:700;color:#141210}
+.tech-desc{font-size:11px;color:#9C9488;margin-top:2px;font-weight:500}
+.quote{background:#141210;border-radius:12px;padding:32px;margin:32px 0;position:relative}
+.quote-text{font-size:17px;font-weight:600;color:#fff;line-height:1.6;letter-spacing:-.2px;margin-bottom:16px}
+.quote-text span{color:#D5552A}
+.quote-attr{font-size:12px;color:rgba(255,255,255,.35);font-weight:500}
+.footer-cta{background:#D5552A;border-radius:12px;padding:40px 32px;text-align:center;margin-top:40px}
+.footer-cta h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.3px}
+.footer-cta p{font-size:14px;color:rgba(255,255,255,.7);font-weight:500;margin-bottom:24px}
+.cta-btn{display:inline-block;background:#fff;color:#D5552A;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;padding:12px 28px;border-radius:8px;text-decoration:none;letter-spacing:-.2px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eye">Product Case Study</div>
+  <h1 class="hero-h1">How <span>LeadHunt</span> was built to fix broken lead generation</h1>
+  <div class="hero-sub">From a slow manual process to a smart Chrome Extension that scrapes, classifies, and pitches in minutes.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Chrome Extension</span>
+    <span class="hero-tag">Manifest V3</span>
+    <span class="hero-tag">Google Maps</span>
+    <span class="hero-tag">Cold Outreach</span>
+    <span class="hero-tag">Vanilla JS</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Problem -->
+  <div class="section">
+    <div class="eyebrow">The Problem</div>
+    <h2>Lead generation was broken for agencies</h2>
+    <p>Agency founders and sales teams were spending 3 to 4 hours every day doing the same manual work. Search Google Maps. Copy a business name. Find a phone number. Open a new tab to search for an email. Write a pitch from scratch. Repeat 50 times.</p>
+    <p>The tools that existed were either expensive SaaS products with monthly subscriptions, or crude scrapers that got blocked immediately or returned only 10% of the actual results.</p>
+    <div class="problem-grid">
+      <div class="problem-card"><div class="problem-icon">⏱</div><div class="problem-title">Hours lost to manual work</div><div class="problem-body">Copying names, phones, and addresses one by one from Google Maps takes hours and produces inconsistent data.</div></div>
+      <div class="problem-card"><div class="problem-icon">🔒</div><div class="problem-title">Scrapers get blocked</div><div class="problem-body">Headless browser scrapers are detected and blocked by Google almost immediately. They also miss most results due to virtual scrolling.</div></div>
+      <div class="problem-card"><div class="problem-icon">📝</div><div class="problem-title">Generic cold emails</div><div class="problem-body">Without knowing the business type and their likely pain points, outreach emails feel templated and get ignored.</div></div>
+      <div class="problem-card"><div class="problem-icon">💸</div><div class="problem-title">Expensive subscriptions</div><div class="problem-body">SaaS tools charge per lead or per month. For an agency doing daily prospecting, costs add up to thousands of rupees a month.</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Insight -->
+  <div class="section">
+    <div class="eyebrow">The Insight</div>
+    <h2>The browser is the best scraper</h2>
+    <p>Google Maps cannot distinguish between a real user and a content script running inside Chrome. A Chrome Extension uses the exact same session, cookies, IP address, and user agent as normal browsing. No blocking, no CAPTCHAs, no proxies needed.</p>
+    <p>The only technical challenge was virtual scrolling. Google Maps removes cards from the DOM as you scroll. Every existing solution tried to collect data after scrolling and captured almost nothing. LeadHunt reads card data during the scroll, the moment each card appears.</p>
+
+    <div class="quote">
+      <div class="quote-text">The winning insight was that <span>every card that briefly exists in the DOM can be read</span>, even if it gets removed a second later. Harvest during the scroll, not after.</div>
+      <div class="quote-attr">Core architecture principle</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Solution -->
+  <div class="section">
+    <div class="eyebrow">The Solution</div>
+    <h2>Two-phase scraping architecture</h2>
+    <p>LeadHunt solves the virtual DOM problem with a two-phase approach that captures complete data from every listing regardless of scroll position.</p>
+    <div class="phase-stack">
+      <div class="phase-card">
+        <div class="phase-num">1</div>
+        <div>
+          <div class="phase-title">Phase 1 — Harvest during scroll</div>
+          <div class="phase-body">As the results panel scrolls, a MutationObserver continuously reads every card that enters the viewport. Name, category, rating, reviews, phone, address, and Maps URL are captured into a deduplicated Map. By the end of scrolling, all leads are stored regardless of DOM state.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">2</div>
+        <div>
+          <div class="phase-title">Phase 2 — Enrich only what is missing</div>
+          <div class="phase-body">Only listings that are missing a website or phone number get individually opened for enrichment. Most leads are already complete from Phase 1, so this step is minimal. This keeps the total scrape time fast while still getting deep data where it matters.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">+</div>
+        <div>
+          <div class="phase-title">Email extraction</div>
+          <div class="phase-body">For each listing with a website, the extension fetches the homepage HTML and extracts email addresses using a regex with a blacklist that filters out platform emails, CDN addresses, and noreply addresses. Domain-matching emails are prioritised.</div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-val">100%</div><div class="stat-label">of results captured</div></div>
+      <div class="stat-card"><div class="stat-val">19</div><div class="stat-label">business segments</div></div>
+      <div class="stat-card"><div class="stat-val">0</div><div class="stat-label">API keys required</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Pitch Model -->
+  <div class="section">
+    <div class="eyebrow">The Pitch Model</div>
+    <h2>Personalised outreach without an AI subscription</h2>
+    <p>The pitch model is a rule-based classifier built into the extension. It runs entirely offline and generates a tailored email or WhatsApp message in under 50 milliseconds. No API calls, no subscription, no latency.</p>
+    <p>For each lead it reads the business category, classifies it into one of 19 segments, identifies the most likely pain point for that segment, selects the 3 most relevant services to pitch, and adapts the opening hook based on the lead's data signals.</p>
+    <div class="segment-grid">
+      <div class="segment-pill">Restaurant<span>More diners, discovery</span></div>
+      <div class="segment-pill">Healthcare<span>Patient acquisition</span></div>
+      <div class="segment-pill">Fitness<span>Memberships, bookings</span></div>
+      <div class="segment-pill">Retail<span>Online conversion</span></div>
+      <div class="segment-pill">Real Estate<span>Qualified buyer leads</span></div>
+      <div class="segment-pill">Automotive<span>Service bookings</span></div>
+      <div class="segment-pill">Education<span>Student admissions</span></div>
+      <div class="segment-pill">Hospitality<span>Direct bookings</span></div>
+      <div class="segment-pill">B2B<span>Lead pipeline</span></div>
+      <div class="segment-pill">Beauty<span>Booked appointments</span></div>
+      <div class="segment-pill">Home Services<span>Local discovery</span></div>
+      <div class="segment-pill">Legal / Pro<span>Credibility, leads</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Features -->
+  <div class="section">
+    <div class="eyebrow">Features</div>
+    <h2>Everything in 5 tabs</h2>
+    <div class="tab-showcase">
+      <div class="tab-card"><div class="tab-name">Scrape</div><div class="tab-desc">Live stats, progress, start/stop</div></div>
+      <div class="tab-card"><div class="tab-name">Leads</div><div class="tab-desc">Searchable, sortable table</div></div>
+      <div class="tab-card"><div class="tab-name">Email</div><div class="tab-desc">4 templates, 4 tones</div></div>
+      <div class="tab-card"><div class="tab-name">WhatsApp</div><div class="tab-desc">Pre-filled, bulk queue</div></div>
+      <div class="tab-card"><div class="tab-name">Settings</div><div class="tab-desc">Filters, columns, API key</div></div>
+    </div>
+    <div class="feature-grid" style="margin-top:16px">
+      <div class="feature-card"><div class="feature-title"><div class="feature-dot"></div>CSV and JSON export</div><div class="feature-body">Configurable columns — choose exactly which fields to include in every export.</div></div>
+      <div class="feature-card"><div class="feature-title"><div class="feature-dot"></div>File attachments</div><div class="feature-body">Attach PDFs, images, or decks to WhatsApp messages with clear guidance on how to send them.</div></div>
+      <div class="feature-card"><div class="feature-title"><div class="feature-dot"></div>Tab-switch resilient</div><div class="feature-body">Scraping survives switching tabs. State persists in chrome.storage so nothing is ever lost.</div></div>
+      <div class="feature-card"><div class="feature-title"><div class="feature-dot"></div>Optional AI generation</div><div class="feature-body">Paste an Anthropic API key for AI-written emails. Falls back to the built-in model automatically.</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Design -->
+  <div class="section">
+    <div class="eyebrow">Design</div>
+    <h2>Warm, precise, and intentional</h2>
+    <p>The design avoids the cold blue-grey palette that most developer tools default to. A warm sand background with a red-orange accent creates a tool that feels built for sales people, not engineers.</p>
+    <div class="decision-stack">
+      <div class="decision-row"><div class="decision-q">Why Plus Jakarta Sans?</div><div class="decision-a">Strong character at display weight (800) while staying legible at 10px label size. Generic system fonts lose personality at small sizes.</div></div>
+      <div class="decision-row"><div class="decision-q">Why Lucide icons?</div><div class="decision-a">Inline SVGs render identically on every OS and Chrome version. They inherit color via currentColor, eliminating separate icon color variables.</div></div>
+      <div class="decision-row"><div class="decision-q">Why warm neutrals?</div><div class="decision-a">Cold greys feel like system UI. Warm sand and charcoal feel like a product someone chose to design, not a default.</div></div>
+      <div class="decision-row"><div class="decision-q">Why no em-dashes?</div><div class="decision-a">They look typographically heavy in tight UI copy at small sizes and break awkwardly in narrow containers. Colons and commas are cleaner.</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Tech -->
+  <div class="section">
+    <div class="eyebrow">Tech Stack</div>
+    <h2>Zero dependencies, zero build tools</h2>
+    <p>The entire extension is plain HTML, CSS, and JavaScript. No React, no Webpack, no npm. This means anyone can open any file in a text editor and understand exactly what it does.</p>
+    <div class="tech-row">
+      <div class="tech-card"><div class="tech-dot"></div><div><div class="tech-name">Chrome Extension MV3</div><div class="tech-desc">Manifest V3 with service worker, scripting, storage, and tabs permissions</div></div></div>
+      <div class="tech-card"><div class="tech-dot"></div><div><div class="tech-name">Vanilla JavaScript</div><div class="tech-desc">No frameworks. State managed with chrome.storage and plain JS objects</div></div></div>
+      <div class="tech-card"><div class="tech-dot"></div><div><div class="tech-name">Plus Jakarta Sans</div><div class="tech-desc">Loaded from Google Fonts. 400 / 500 / 600 / 700 / 800 weights</div></div></div>
+      <div class="tech-card"><div class="tech-dot"></div><div><div class="tech-name">Lucide Icons</div><div class="tech-desc">Inline SVG, stroke-width 2, 14 to 20px depending on context</div></div></div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <h3>Try LeadHunt</h3>
+    <p>Install the extension and run your first scrape in under 2 minutes.</p>
+    <a class="cta-btn" href="https://github.com/gautamc01/Lead_Hunt">View on GitHub</a>
+  </div>
+
+</div>
+</body>
+</html>
